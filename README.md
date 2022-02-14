@@ -1,2 +1,2 @@
 # aap_migration
-Reference Architectures supporting the migration between major AAP versions
+Reference Architecture supporting the migration between AAP 1.2 to AAP 2

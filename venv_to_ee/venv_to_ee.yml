@@ -17,5 +17,3 @@
      - name: Create EEs
        include_tasks: create_ee.yml
        loop: "{{ venv_migrate_ee_python | dict2items }}"
-
-

@@ -1,0 +1,21 @@
+---
+- name: Review custom virtualenvs and pull requirements
+  hosts: tower
+  become: true
+  tasks:
+    - name: Include venv role
+      include_role:
+        name: redhat_cop.ee_utilities.virtualenv_migrate
+    - set_fact:
+        venv_migrate_ee_python: "{{ {} | combine(venv_migrate_ee_python_list) }}"
+ 
+-  name: Build EEs with ee_builder role
+   hosts: localhost
+   tasks:
+     - set_fact:
+         venv_migrate_ee_python: "{{ hostvars[groups['tower'][0]]['venv_migrate_ee_python'] }}"
+     - name: Create EEs
+       include_tasks: create_ee.yml
+       loop: "{{ venv_migrate_ee_python | dict2items }}"
+
+
